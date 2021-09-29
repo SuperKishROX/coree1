@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">coree1</string>
+    <string name="app_name" translatable="false">Score Game Core 1</string>
     <string name="textview">TextView</string>
     <string name="steal">steal</string>
     <string name="score">score</string>

@@ -1,28 +1,18 @@
 package com.example.coree1
 
-import android.content.res.Configuration
 import android.graphics.Color
-import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 
 
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        const val COUNT_KEY = "COUNT_KEY" // const key to save/read value from bundle
-    }
 
-    private var mediaPlayer: MediaPlayer? = null
 
     override fun onStart() {
         super.onStart()
@@ -36,14 +26,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Log.i("LIFECYCLE" , "onCreate")
-
-
-
-
-
-
-
-
 
         val score = findViewById<Button>(R.id.score)
         val steal = findViewById<Button>(R.id.steal)
@@ -72,10 +54,13 @@ class MainActivity : AppCompatActivity() {
 
         }
         steal.setOnClickListener {
-            increment_number --
-            result.text = increment_number.toString()
-            sharePref.edit().putInt("num",increment_number).apply()
-            check(increment_number,result)
+            if (increment_number in 1..16) {
+                increment_number --
+                result.text = increment_number.toString()
+                sharePref.edit().putInt("num",increment_number).apply()
+                check(increment_number,result)
+            }
+
         }
         reset.setOnClickListener {
             increment_number = 0
@@ -86,29 +71,27 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-
-
-
     fun check(increment_number:Int, result:TextView){
-        if (increment_number >= 10){
-            result.setTextColor(Color.GREEN)
-        }else if (increment_number >= 5){
-            result.setTextColor(Color.BLUE)
-
-        }else if (increment_number >= 5){
-            result.setTextColor(Color.BLUE) }
-        else if (increment_number ==3){
-          var  mediaPlayer = MediaPlayer.create(this, R.raw.bugle_tune) //audio
-            mediaPlayer.start()
-
-
+        Log.i("increment number", Integer.toString(increment_number))
+        when {
+            increment_number >= 10 -> {
+                result.setTextColor(Color.GREEN)
+            }
+            increment_number >= 5 -> {
+                result.setTextColor(Color.BLUE)
 
             }
-        else if (increment_number > 14)
-        else{
-            result.setTextColor(Color.BLACK)
+            increment_number >= 5 -> {
+                result.setTextColor(Color.BLUE)
+            }
+            else -> {
+                result.setTextColor(Color.BLACK)
+            }
+        }
+        if (increment_number == 15){
+            Log.i("Playing Track", "Kono Dio Da")
+            val mediaPlayer = MediaPlayer.create(this, R.raw.kono_dio_da) //audio
+            mediaPlayer.start()
         }
 
 

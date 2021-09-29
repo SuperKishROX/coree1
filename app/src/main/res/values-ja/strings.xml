@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="steal">窃盗</string>
+    <string name="score">得点</string>
+    <string name="reset">組み替える</string>
+    <string name="_0">0</string>
+    <string name="change_the_language">"言語を変更 "</string>
+    <string name="textview">テキストビュー</string>
+</resources>
